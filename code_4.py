@@ -26,8 +26,8 @@ def get_the_cheapest_big_mac_price_by_year(year):
 def get_the_most_expensive_big_mac_price_by_year(year):
     query = f"(date >= '{year}-01-01' and date <= '{year}-12-31')"
     result_df = df.query(query)
-    minidx = result_df["dollar_price"].idxmax()
-    result_series = result_df.loc[minidx]
+    maxidx = result_df["dollar_price"].idxmax()
+    result_series = result_df.loc[maxidx]
     result_message = f"{result_series['name']}({result_series['iso_a3']}): ${round(result_series['dollar_price'],2)}"
     return result_message
 
