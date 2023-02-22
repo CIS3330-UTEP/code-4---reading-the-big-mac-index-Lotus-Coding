@@ -24,7 +24,12 @@ def get_the_cheapest_big_mac_price_by_year(year):
     result_message = f"{result_series['name']}({result_series['iso_a3']}): ${round(result_series['dollar_price'],2)}"
     return result_message
 def get_the_most_expensive_big_mac_price_by_year(year):
-    pass # Remove this line and code your function
+    query = f"(date >= '{year}-01-01' and date <= '{year}-12-31')"
+    result_df = df.query(query)
+    minidx = result_df["dollar_price"].idxmax()
+    result_series = result_df.loc[minidx]
+    result_message = f"{result_series['name']}({result_series['iso_a3']}): ${round(result_series['dollar_price'],2)}"
+    return result_message
 
 if __name__ == "__main__":
     result_1 = get_big_mac_price_by_year(2014,'can')
@@ -33,4 +38,5 @@ if __name__ == "__main__":
     print(result_2)
     result_3 =  get_the_cheapest_big_mac_price_by_year(2014)
     print(result_3)
-   
+    result_4 = get_the_most_expensive_big_mac_price_by_year(2016)
+    print(result_4)
